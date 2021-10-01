@@ -2,6 +2,11 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
+#define high_sw 2
+#define low_sw 4
+#define high_led 3
+#define low_led 5
+
 //create an RF24 object
 RF24 radio(9, 8);  // CE, CSN
 
@@ -17,8 +22,8 @@ void setup()
   
   //Set module as transmitter
   radio.stopListening();
-  pinMode(5,INPUT_PULLUP);
-  pinMode(2,OUTPUT);
+  pinMode(high_sw,INPUT_PULLUP);
+  pinMode(high_led,OUTPUT);
 }
 void loop()
 {
@@ -27,13 +32,13 @@ void loop()
   radio.write(&text, sizeof(text));
   
   delay(1000);*/
-  int sensorState = digitalRead(5);
+  int sensorState = digitalRead(high_sw);
   const char text1[] = "HIGH";
   if(sensorState == LOW){
-    digitalWrite(2,HIGH);
+    digitalWrite(high_led,HIGH);
     radio.write(&text1, sizeof(text1));
   } else {
-    digitalWrite(2,LOW);
+    digitalWrite(high_led,LOW);
   }
   /*int sensorState = digitalRead(5);
   if(sensorState == LOW){

@@ -2,6 +2,12 @@
 #include <nRF24L01.h>
 #include <RF24.h>
 
+#define speaker 2
+#define ok_led 3
+#define er_led 4
+#define wer_led 5
+#define motor 6
+
 //create an RF24 object
 RF24 radio(9, 8);  // CE, CSN
 
@@ -20,7 +26,11 @@ void setup()
   
   //Set module as receiver
   radio.startListening();
-  pinMode(5,OUTPUT);
+  pinMode(speaker,OUTPUT);
+  pinMode(ok_led,OUTPUT);
+  pinMode(er_led,OUTPUT);
+  pinMode(wer_led,OUTPUT);
+  pinMode(motor,OUTPUT);
 }
 
 void loop()
@@ -36,9 +46,15 @@ void loop()
   {
     char text1[32] = {0};
     radio.read(&text1, sizeof(text1));
-    digitalWrite(5,HIGH);
+    digitalWrite(motor,HIGH);
     Serial.println(text1);
   } else {
-    digitalWrite(5,LOW);
+    digitalWrite(motor,LOW);
   }
+  /*digitalWrite(speaker,HIGH);
+  digitalWrite(ok_led,HIGH);
+  digitalWrite(er_led,HIGH);
+  digitalWrite(wer_led,HIGH);
+  digitalWrite(motor,HIGH);
+  delay(100);*/
 }
