@@ -46,10 +46,12 @@ void loop()
   {
     char text1[32] = {0};
     radio.read(&text1, sizeof(text1));
-    digitalWrite(motor,HIGH);
+//    digitalWrite(motor,HIGH);
+    digitalWrite(speaker,HIGH);
     Serial.println(text1);
   } else {
-    digitalWrite(motor,LOW);
+//    digitalWrite(motor,LOW);
+    digitalWrite(speaker,LOW);
   }
   /*digitalWrite(speaker,HIGH);
   digitalWrite(ok_led,HIGH);
